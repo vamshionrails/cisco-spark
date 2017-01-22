@@ -6,6 +6,7 @@ var Flint = require('node-flint');
 var webhook = require('node-flint/webhook');
 var express = require('express');
 var bodyParser = require('body-parser');
+var disk = require('diskusage');
 var app = express();
 app.use(bodyParser.json());
 const config = require("./config.json");
@@ -31,6 +32,53 @@ flint.hears('/hello', function(bot, trigger) {
   console.log("/hello fired");
   /*bot.say('%s, you said hello to me ! ', trigger.personDisplayName);*/
   bot.say({markdown: '*Hello <@personEmail:' + trigger.personEmail + '|' + trigger.personDisplayName + '>*'});
+});
+/* import external file */
+flint.hears('/halo', function(bot, trigger) {
+  var halo = require("./halo.js");
+  console.log("/halo fired");
+  /*bot.say('%s, you said hello to me ! ', trigger.personDisplayName);*/
+
+  bot.say({markdown: '*Halo Import:' + halo.sayHelloInEnglish()});
+});
+
+/* plot graph */
+
+flint.hears('/plot', function(bot, trigger) {
+   var plot = require('plotter').plot;
+  console.log("/plot fired");
+
+  plot({
+    data:       [ 3, 1, 2, 3, 4 ],
+    filename:   'output.svg',
+    format:     'svg'
+ });
+  /*bot.say('%s, you said hello to me ! ', trigger.personDisplayName);*/
+
+  bot.say({markdown: '*Plot  :' + plot.keys});
+});
+
+
+
+
+
+/* disk usage */
+flint.hears('/disk', function(bot, trigger) {
+  console.log("/disk fired");
+
+  // get disk usage. Takes mount point as first parameter 
+d = disk.check('/', function(err, info) {
+    console.log(info.available);
+    console.log(info.free);
+    console.log(info.total);
+
+
+  /*bot.say('%s, you said hello to me ! ', trigger.personDisplayName);*/
+  bot.say({markdown: '*Disk Usage:Available:' + info.available });
+  bot.say({markdown: '*Disk Usage:Free:' + info.free});
+  bot.say({markdown: '*Disk Usage:Total:' + info.total});
+ });
+
 });
 
 
@@ -67,6 +115,25 @@ flint.hears('/roomid', function(bot, trigger) {
   bot.say({markdown:'**Here are the current room settings: \n **'+ trigger.roomId,file:'https://www.sabre.com/wp/wp-content/themes/sabre-edl/images/sabre-logo-slab.png'});
 });
 
+/* graph */
+
+flint.hears('/graph', function(bot, trigger) {
+  console.log("/graph fired");
+  /*bot.say('This is your room ID', trigger.roomId);*/
+
+  bot.say({markdown:'**Monitoring Graph: \n **',file:'http://ls.logicmonitor.com/wp-content/uploads/2011/09/multi-host-graph-645.png'});
+});
+/* graph */
+
+flint.hears('/table', function(bot, trigger) {
+  console.log("/table fired");
+  var table = require('markdown-table');
+  /*bot.say('This is your room ID', trigger.roomId);*/
+   
+    z ="***````html<table><tr>id</tr><td>vamshi</td></table>````***"
+  bot.say({markdown: z});
+});
+
 /*
 roomTitle
 */
@@ -90,7 +157,9 @@ flint.hears('/hm', function(bot, trigger) {
   bot.say('markdown', 'Hi <@personEmail:vamshidhar.kuchikulla@sabre.com|Vamshi>, your order has been processed.');
 });
 
-/* */
+
+
+/* broadcast*/
 
  flint.hears(/\/broadcast( |.|$)/i, function(bot, trigger){
   var request = trigger.text.replace("/broadcast ",'');

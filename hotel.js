@@ -5,6 +5,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
 
+//import files 
+var halo = require("./halo.js");
+
 var app = express();
 app.use(bodyParser.json());
 
@@ -122,8 +125,28 @@ flint.hears('greeting', function(bot, trigger) {
     // remove event (removeListener is an inherited function from EventEmitter)
     bot.removeListener('personExits', checkin);
 
-    // announce Hotel California is closed
+    // announce Hotel California is closed  
     bot.say('**Hotel California** Welcome to hotel california!');
+  } else {
+    // announce Hotel California is already closed
+    bot.say('**Hotel California** We already greeted you!');
+  }
+
+});
+
+//status
+flint.hears('status', function(bot, trigger) {
+  // retrieve value of key 'htc'. When this is ran initially, this will return 'undefined'.
+  var htc = bot.recall('htc');
+
+  if(htc && htc.enabled) {
+    htc.enabled = true;
+
+    // remove event (removeListener is an inherited function from EventEmitter)
+    bot.removeListener('personExits', checkin);
+
+    // announce Hotel California is closed  
+    bot.say('**Hotel California** Checking Status..!');
   } else {
     // announce Hotel California is already closed
     bot.say('**Hotel California** We already greeted you!');
