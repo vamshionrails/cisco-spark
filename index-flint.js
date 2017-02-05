@@ -1,5 +1,6 @@
 /*
 CISCO-SPARK bots
+https://npm.taobao.org/package/flint-bot
 */
 var Flint = require('node-flint');
 var webhook = require('node-flint/webhook');
