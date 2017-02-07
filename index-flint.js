@@ -1,7 +1,9 @@
 /*
 CISCO-SPARK bots
 https://npm.taobao.org/package/flint-bot
-*/
+
+https://gist.githubusercontent.com/moutons/3812053/raw/57bbddea7768bff812d37cfd02afd867ec6377e7/puppet-kickstart.sh*/
+
 var Flint = require('node-flint');
 var webhook = require('node-flint/webhook');
 var express = require('express');
