@@ -2,7 +2,11 @@
 CISCO-SPARK bots
 https://npm.taobao.org/package/flint-bot
 
-https://gist.githubusercontent.com/moutons/3812053/raw/57bbddea7768bff812d37cfd02afd867ec6377e7/puppet-kickstart.sh*/
+https://gist.githubusercontent.com/moutons/3812053/raw/57bbddea7768bff812d37cfd02afd867ec6377e7/puppet-kickstart.sh
+gem install --install-dir /apps/puppet/puppet-4.9.1 puppet -v 4.9.1
+
+http://foreigngods.com/blog/2015/03/31/48/install-ruby-from-source-centos-6/
+*/
 
 var Flint = require('node-flint');
 var webhook = require('node-flint/webhook');
