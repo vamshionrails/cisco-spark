@@ -7,6 +7,7 @@ gem install --install-dir /apps/puppet/puppet-4.9.1 puppet -v 4.9.1
 
 http://foreigngods.com/blog/2015/03/31/48/install-ruby-from-source-centos-6/
 https://roidelapluie.be/blog/2015/09/15/puppet-4-create-resources/
+https://github.com/scotch-io/node-ejs/blob/master/views/partials/header.ejs
 
 */
 var Flint = require('node-flint');
